@@ -17,13 +17,19 @@ opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
 
--- cursor line 
+-- cursor line
 opt.cursorline = false
 
 -- appearance
 opt.termguicolors = true
 -- opt.background = "dark"
 -- opt.signcolumn = "yes"
+
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
+
+opt.hlsearch = false
+opt.incsearch = true
 
 -- backspace
 opt.backspace = "indent,eol,start"

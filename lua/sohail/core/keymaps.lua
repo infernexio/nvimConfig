@@ -1,8 +1,8 @@
-vim.g.mapleader=" "
+vim.g.mapleader = " "
 
 local keymap = vim.keymap -- ease of use
 
---general 
+--general
 keymap.set("i", ";;", "<ESC>")
 
 keymap.set("n", "<leader>+", "<C-a>")
@@ -28,6 +28,9 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>")
 -- nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
+--format
+keymap.set("n", "<leader>F", vim.lsp.buf.format)
+
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
 keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
@@ -40,3 +43,6 @@ keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>") -- list all git 
 keymap.set("n", "<leader>gfc", "<cmd>Telescope git_bcommits<cr>") -- list git commits for current file/buffer (use <cr> to checkout) ["gfc" for git file commits]
 keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<cr>") -- list git branches (use <cr> to checkout) ["gb" for git branch]
 keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current changes per file with diff preview ["gs" for git status]
+
+-- undotree
+keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
