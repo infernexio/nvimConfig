@@ -1,12 +1,12 @@
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -20,84 +20,84 @@ augroup end
 
 local status, packer = pcall(require, "packer")
 if not status then
-  return
+	return
 end
 
 return packer.startup(function(use)
-  use("wbthomason/packer.nvim")
+	use("wbthomason/packer.nvim")
 
-  use("nvim-lua/plenary.nvim")
+	use("nvim-lua/plenary.nvim")
 
-  use("navarasu/onedark.nvim") -- colorscheme
-  use("bluz71/vim-moonfly-colors") -- seperate colorscheme
+	use("navarasu/onedark.nvim") -- colorscheme
+	use("bluz71/vim-moonfly-colors") -- seperate colorscheme
 
-  use("christoomey/vim-tmux-navigator") -- tmux split window
+	use("christoomey/vim-tmux-navigator") -- tmux split window
 
-  use("szw/vim-maximizer") -- maximizes and resotres current window
+	use("szw/vim-maximizer") -- maximizes and resotres current window
 
-  use("tpope/vim-surround") -- lets you surround words with ys and motion like ex.) ysw
+	use("tpope/vim-surround") -- lets you surround words with ys and motion like ex.) ysw
 
-  use("numToStr/Comment.nvim") -- mass comment with gc ex.) gc9j
+	use("numToStr/Comment.nvim") -- mass comment with gc ex.) gc9j
 
-  use("nvim-tree/nvim-tree.lua") -- file explorer
+	use("nvim-tree/nvim-tree.lua") -- file explorer
 
-  use("nvim-tree/nvim-web-devicons") -- icons
+	use("nvim-tree/nvim-web-devicons") -- icons
 
-  use("nvim-lualine/lualine.nvim") -- statusline
-  
-  -- fuzzy finder
-  use({"nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-  use("nvim-telescope/telescope.nvim")
+	use("nvim-lualine/lualine.nvim") -- statusline
 
-  -- autocompletion
-  use("hrsh7th/nvim-cmp") -- completion plugin
-  use("hrsh7th/cmp-buffer") -- source for text in buffer
-  use("hrsh7th/cmp-path") -- source for file system paths
+	-- fuzzy finder
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use("nvim-telescope/telescope.nvim")
 
-  -- snippets
-  use("L3MON4D3/LuaSnip") -- snippet engine
-  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-  use("rafamadriz/friendly-snippets") -- useful snippets
+	-- autocompletion
+	use("hrsh7th/nvim-cmp") -- completion plugin
+	use("hrsh7th/cmp-buffer") -- source for text in buffer
+	use("hrsh7th/cmp-path") -- source for file system paths
 
-  -- managing & installing lsp servers, linters & formatters
-  use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
-  use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
+	-- snippets
+	use("L3MON4D3/LuaSnip") -- snippet engine
+	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+	use("rafamadriz/friendly-snippets") -- useful snippets
 
-  -- configuring lsp servers
-  use("neovim/nvim-lspconfig") -- easily configure language servers
-  use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-  use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    requires = {
-      { "nvim-tree/nvim-web-devicons" },
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-  }) -- enhanced lsp uis
-  use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+	-- managing & installing lsp servers, linters & formatters
+	use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
+	use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
-  -- formatting & linting
-  use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
-  use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+	-- configuring lsp servers
+	use("neovim/nvim-lspconfig") -- easily configure language servers
+	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		requires = {
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	}) -- enhanced lsp uis
+	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
-  -- treesitter configuration
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-  })
+	-- formatting & linting
+	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
-  -- auto closing
-  use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
-  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
+	-- treesitter configuration
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+			ts_update()
+		end,
+	})
 
-  -- git integration
-  use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+	-- auto closing
+	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
+	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
-  if packer_bootstrap then
-    require("packer").sync()
-  end
+	-- git integration
+	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+	if packer_bootstrap then
+		require("packer").sync()
+	end
 end)
